@@ -21,16 +21,3 @@ The system functions across three main layers:
 3.  **Storage Layer:** Local file system storing trained dataset models and a structured CSV database for attendance logs.
 
 ---
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-Ensure you have Python 3.x installed on your machine. You will need a functioning webcam for the live recognition feature.
-
-### Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/yourusername/facial-recognition-attendance.git](https://github.com/yourusername/facial-recognition-attendance.git)
-   cd facial-recognition-attendance
