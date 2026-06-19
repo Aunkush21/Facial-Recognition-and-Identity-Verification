@@ -21,3 +21,5 @@ The system functions across three main layers:
 3.  **Storage Layer:** Local file system storing trained dataset models and a structured CSV database for attendance logs.
 
 ---
+
+NOTE: I have built this project as a part of the final semester project submission.
