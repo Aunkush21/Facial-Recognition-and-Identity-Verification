@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Sign in — SENTRY{% endblock %}
+{% block content %}
+<section class="auth-brand">
+  <div class="auth-logo">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 8V5a1 1 0 0 1 1-1h3"/><path d="M20 8V5a1 1 0 0 0-1-1h-3"/>
+        <path d="M4 16v3a1 1 0 0 0 1 1h3"/><path d="M20 16v3a1 1 0 0 1-1 1h-3"/>
+        <path d="M9 10c0 .8.5 1.5 1 2"/><path d="M15 10c0 .8-.5 1.5-1 2"/>
+        <path d="M12 11v3.5"/><path d="M9.5 16.5c1.5 1.2 3.5 1.2 5 0"/>
+      </svg>
+    </span>
+    <span class="brand-word">SENTRY<small>Biometric Attendance</small></span>
+  </div>
+
+  <div class="auth-hero">
+    <h2>Verify presence with <span class="hl">live facial recognition.</span></h2>
+    <p>Liveness-checked enrollment, multi-frame consensus, and a complete audit trail — purpose-built for trustworthy attendance.</p>
+    <div class="auth-points">
+      <div class="auth-point">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        Anti-spoofing liveness gate on every scan
+      </div>
+      <div class="auth-point">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg>
+        Consensus across frames before any record
+      </div>
+      <div class="auth-point">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+        Every action written to the audit log
+      </div>
+    </div>
+  </div>
+
+  <p class="mono" style="color: var(--dim); font-size: 0.72rem; letter-spacing: 0.1em;">SECURE TERMINAL · LOCAL DEPLOYMENT</p>
+</section>
+
+<section class="auth-form-side">
+  <div class="auth-card">
+    <div class="eyebrow">Authentication</div>
+    <h1>Sign in</h1>
+    <p class="lead">Enter your operator or administrator credentials.</p>
+    <form id="login-form">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" autocomplete="username" placeholder="e.g. admin" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" placeholder="••••••••" required>
+      <p class="error-text" id="login-error"></p>
+      <button type="submit">Sign in</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/login.js?v=3"></script>
+{% endblock %}

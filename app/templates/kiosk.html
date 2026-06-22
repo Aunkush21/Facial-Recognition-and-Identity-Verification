@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Check in — SENTRY Kiosk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/styles.css?v=4">
+</head>
+<body>
+  <div class="kiosk">
+    <header class="kiosk-top">
+      <div class="auth-logo">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 8V5a1 1 0 0 1 1-1h3"/><path d="M20 8V5a1 1 0 0 0-1-1h-3"/>
+            <path d="M4 16v3a1 1 0 0 0 1 1h3"/><path d="M20 16v3a1 1 0 0 1-1 1h-3"/>
+            <path d="M9 10c0 .8.5 1.5 1 2"/><path d="M15 10c0 .8-.5 1.5-1 2"/>
+            <path d="M12 11v3.5"/><path d="M9.5 16.5c1.5 1.2 3.5 1.2 5 0"/>
+          </svg>
+        </span>
+        <span class="brand-word">SENTRY<small>Self check-in</small></span>
+      </div>
+      <div class="kiosk-top-right">
+        <time id="kiosk-clock" class="clock"></time>
+        <a href="/recognize" class="logout" title="Exit kiosk" aria-label="Exit kiosk">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <main class="kiosk-stage">
+      <div class="scan kiosk-scan" id="scan">
+        <video id="video" autoplay playsinline muted></video>
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+        <span class="sweep"></span>
+      </div>
+      <h1 class="kiosk-status" id="kiosk-status">Starting camera…</h1>
+      <p class="kiosk-sub" id="kiosk-sub">Look at the camera to check in.</p>
+    </main>
+
+    <div class="kiosk-overlay" id="kiosk-overlay" hidden>
+      <div class="kiosk-card" id="kiosk-card">
+        <div class="kiosk-check" id="kiosk-icon"></div>
+        <div class="kiosk-name" id="kiosk-name"></div>
+        <div class="kiosk-result" id="kiosk-result"></div>
+        <div class="kiosk-time mono" id="kiosk-time"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/camera.js?v=3"></script>
+  <script src="/static/js/kiosk.js?v=3"></script>
+</body>
+</html>

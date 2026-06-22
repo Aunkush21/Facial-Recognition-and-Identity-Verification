@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Audit log — SENTRY{% endblock %}
+{% block topbar_label %}Audit Log{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="eyebrow">Immutable trail</div>
+  <h1>Audit log</h1>
+  <p>Every login, enrollment, recognition, and attendance write — newest first.</p>
+</div>
+
+<div class="panel">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Time</th><th>Event</th><th>Result</th><th>Identity</th><th>Confidence</th><th>Detail</th></tr>
+      </thead>
+      <tbody id="audit-rows"></tbody>
+    </table>
+  </div>
+  <div class="pagination">
+    <button id="prev-btn" class="secondary" type="button">Previous</button>
+    <button id="next-btn" class="secondary" type="button">Next</button>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/audit.js?v=3"></script>
+{% endblock %}

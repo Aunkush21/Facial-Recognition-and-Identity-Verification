@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}SENTRY — Facial Recognition{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/styles.css?v=4">
+</head>
+<body>
+  {% if user %}
+  <div class="app">
+    <aside class="sidebar">
+      <a class="brand" href="/recognize" aria-label="SENTRY home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 8V5a1 1 0 0 1 1-1h3"/><path d="M20 8V5a1 1 0 0 0-1-1h-3"/>
+            <path d="M4 16v3a1 1 0 0 0 1 1h3"/><path d="M20 16v3a1 1 0 0 1-1 1h-3"/>
+            <path d="M9 10c0 .8.5 1.5 1 2"/><path d="M15 10c0 .8-.5 1.5-1 2"/>
+            <path d="M12 11v3.5"/><path d="M9.5 16.5c1.5 1.2 3.5 1.2 5 0"/>
+          </svg>
+        </span>
+        <span class="brand-word">SENTRY<small>Biometric Attendance</small></span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="/recognize" data-path="/recognize">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg>
+          <span>Recognize</span>
+        </a>
+        <a href="/enroll" data-path="/enroll">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg>
+          <span>Enroll</span>
+        </a>
+        <a href="/dashboard" data-path="/dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+          <span>Attendance</span>
+        </a>
+        <a href="/kiosk" data-path="/kiosk">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Kiosk</span>
+        </a>
+        {% if user.role.value == "admin" %}
+        <a href="/operators" data-path="/operators">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Operators</span>
+        </a>
+        <a href="/audit" data-path="/audit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>Audit Log</span>
+        </a>
+        {% endif %}
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="who">
+          <span class="who-avatar" aria-hidden="true">{{ user.username[0]|upper }}</span>
+          <span class="who-meta">
+            <strong>{{ user.username }}</strong>
+            <small class="role role-{{ user.role.value }}">{{ user.role.value }}</small>
+          </span>
+        </div>
+        <a href="#" id="logout-link" class="logout" aria-label="Log out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+        </a>
+      </div>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar">
+        <div class="topbar-label">{% block topbar_label %}{% endblock %}</div>
+        <div class="topbar-meta">
+          <span class="sys-pill"><span class="sys-dot"></span>System operational</span>
+          <time id="topbar-clock" class="clock"></time>
+        </div>
+      </header>
+      <main class="content">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+  {% else %}
+  <main class="auth-main">
+    {{ self.content() }}
+  </main>
+  {% endif %}
+
+  <script>
+    document.getElementById("logout-link")?.addEventListener("click", async (e) => {
+      e.preventDefault();
+      await fetch("/auth/logout", { method: "POST" });
+      window.location.href = "/login";
+    });
+    // mark the active nav item
+    (function () {
+      const path = window.location.pathname;
+      document.querySelectorAll(".nav a").forEach((a) => {
+        if (a.getAttribute("data-path") === path) a.classList.add("active");
+      });
+    })();
+    // live clock in the top bar
+    (function () {
+      const el = document.getElementById("topbar-clock");
+      if (!el) return;
+      const tick = () => {
+        el.textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+      };
+      tick();
+      setInterval(tick, 1000);
+    })();
+  </script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

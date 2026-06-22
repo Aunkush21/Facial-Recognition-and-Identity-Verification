@@ -1,0 +1,37 @@
+# ---- Secrets / environment ----
+# .env holds the DB credentials and JWT secret — never commit it.
+.env
+.env.*
+!.env.example
+
+# ---- Application data (never commit biometric data or model weights) ----
+# downloaded ONNX weights (InsightFace + liveness)
+app/models_data/
+*.pickle
+*.pkl
+*.db
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ---- Test / lint caches ----
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---- Logs ----
+*.log
+
+# ---- Claude Code (local config) ----
+.claude/
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

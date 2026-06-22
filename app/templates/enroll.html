@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Enroll — SENTRY{% endblock %}
+{% block topbar_label %}Enrollment{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="eyebrow">Register a face</div>
+  <h1>Enroll</h1>
+  <p>Capture a single, live face for an identity. The same liveness gate used at recognition rejects photos and screens.</p>
+</div>
+
+<div class="grid-2">
+  {% if user.role.value == "admin" %}
+  <div class="panel">
+    <div class="panel-title"><span class="idx">01</span> Create identity</div>
+    <p class="panel-sub">Add the person before capturing their face. Admin only.</p>
+    <form id="create-identity-form">
+      <label for="external_id">External ID</label>
+      <input type="text" id="external_id" name="external_id" placeholder="e.g. emp-0042" required>
+      <label for="full_name">Full name</label>
+      <input type="text" id="full_name" name="full_name" placeholder="e.g. Jane Okoro" required>
+      <div class="field-actions"><button type="submit">Create identity</button></div>
+      <p class="error-text" id="create-error"></p>
+      <p class="success-text" id="create-success"></p>
+    </form>
+  </div>
+  {% endif %}
+
+  <div class="panel">
+    <div class="panel-title"><span class="idx">{{ "02" if user.role.value == "admin" else "01" }}</span> Capture face</div>
+    <p class="panel-sub">Paste an existing identity's ID, then use the live camera or upload a photo.</p>
+    <label for="identity_id">Identity ID</label>
+    <input type="text" id="identity_id" name="identity_id" placeholder="UUID of an existing identity" required>
+
+    <div class="seg" role="tablist" style="margin-top: 16px;">
+      <button type="button" class="seg-btn active" data-mode="camera">Live camera</button>
+      <button type="button" class="seg-btn" data-mode="upload">Upload photo</button>
+    </div>
+
+    <div id="mode-camera">
+      <div class="scan" id="scan" style="margin-top: 16px;">
+        <video id="video" autoplay playsinline muted></video>
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+      </div>
+    </div>
+
+    <div id="mode-upload" hidden>
+      <label for="file-input" class="dropzone" id="dropzone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
+        <span id="dropzone-text">Click to choose a photo, or drag one here</span>
+        <img id="upload-preview" alt="" hidden>
+      </label>
+      <input type="file" id="file-input" accept="image/*" hidden>
+    </div>
+
+    <div class="field-actions"><button id="capture-btn" type="button">Capture &amp; enroll</button></div>
+    <p class="error-text" id="enroll-error"></p>
+    <p class="success-text" id="enroll-success"></p>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/camera.js?v=3"></script>
+<script src="/static/js/enroll.js?v=3"></script>
+{% endblock %}

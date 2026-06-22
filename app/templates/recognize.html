@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Recognize — SENTRY{% endblock %}
+{% block topbar_label %}Live Recognition{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="eyebrow">Live verification</div>
+  <h1>Recognize</h1>
+  <p>Look at the camera. Each frame is liveness-checked, matched, and counted toward consensus before attendance is recorded.</p>
+</div>
+
+<div class="grid-2">
+  <div class="panel">
+    <div class="scan" id="scan">
+      <video id="video" autoplay playsinline muted></video>
+      <span class="corner tl"></span><span class="corner tr"></span>
+      <span class="corner bl"></span><span class="corner br"></span>
+      <span class="sweep"></span>
+      <div class="hud">
+        <span class="dot"></span>
+        <span class="status-line" id="status-line">Camera idle — press Start</span>
+      </div>
+    </div>
+    <div class="field-actions">
+      <button id="start-btn" type="button">Start scanning</button>
+      <button id="stop-btn" type="button" class="secondary">Stop</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title"><span class="idx">LIVE</span> Verification readout</div>
+    <div class="scan-meta">
+      <div class="readout"><div class="k">Match</div><div class="v" id="r-similarity">—</div></div>
+      <div class="readout"><div class="k">Liveness</div><div class="v" id="r-liveness">—</div></div>
+      <div class="readout"><div class="k">Subject</div><div class="v" id="r-subject" style="font-size:0.92rem;">—</div></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-head"><span>Consensus</span><span id="consensus-label">0 / 5</span></div>
+      <div class="progress"><div id="progress-fill"></div></div>
+    </div>
+    <p class="panel-sub" style="margin: 18px 0 0;">A match must hold across 5 agreeing frames within the consensus window before it is committed.</p>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/camera.js?v=3"></script>
+<script src="/static/js/recognize.js?v=3"></script>
+{% endblock %}

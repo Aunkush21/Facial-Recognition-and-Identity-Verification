@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Operators — SENTRY{% endblock %}
+{% block topbar_label %}Operators{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="eyebrow">Access control</div>
+  <h1>Operators</h1>
+  <p>Create a separate login for each person who runs the system — e.g. one per subject teacher. Every action they take is stamped with their name in the audit log.</p>
+</div>
+
+<div class="grid-2">
+  <div class="panel">
+    <div class="panel-title"><span class="idx">＋</span> Add account</div>
+    <p class="panel-sub">Operators run recognition and view attendance. Admins can also manage identities, operators, and the audit log.</p>
+    <form id="create-user-form">
+      <label for="u-username">Username</label>
+      <input type="text" id="u-username" placeholder="e.g. r.sharma" required>
+      <label for="u-label">Label / subject <span style="color:var(--dim)">(optional)</span></label>
+      <input type="text" id="u-label" placeholder="e.g. Physics">
+      <label for="u-role">Role</label>
+      <select id="u-role">
+        <option value="operator">Operator</option>
+        <option value="admin">Admin</option>
+      </select>
+      <label for="u-password">Temporary password</label>
+      <div class="pw-field">
+        <input type="password" id="u-password" placeholder="at least 8 characters" required>
+        <button type="button" class="pw-toggle" data-target="u-password" aria-label="Show password"></button>
+      </div>
+      <label for="u-password2">Confirm password</label>
+      <div class="pw-field">
+        <input type="password" id="u-password2" placeholder="re-enter password" required>
+        <button type="button" class="pw-toggle" data-target="u-password2" aria-label="Show password"></button>
+      </div>
+      <div class="field-actions"><button type="submit">Create account</button></div>
+      <p class="error-text" id="user-error"></p>
+      <p class="success-text" id="user-success"></p>
+    </form>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title"><span class="idx">{{ "00" }}</span> Accounts</div>
+    <p class="panel-sub">Deactivate an account to revoke its access without deleting its audit history.</p>
+    <p class="success-text" id="row-success"></p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>User</th><th>Role</th><th>Status</th><th></th></tr>
+        </thead>
+        <tbody id="user-rows"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="pw-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="pw-modal-title">
+    <h3 id="pw-modal-title">Reset password</h3>
+    <p class="panel-sub" id="pw-modal-sub" style="margin: 6px 0 18px;"></p>
+    <label for="reset-pw">New password</label>
+    <div class="pw-field">
+      <input type="password" id="reset-pw" placeholder="at least 8 characters">
+      <button type="button" class="pw-toggle" data-target="reset-pw" aria-label="Show password"></button>
+    </div>
+    <label for="reset-pw2">Confirm password</label>
+    <div class="pw-field">
+      <input type="password" id="reset-pw2" placeholder="re-enter password">
+      <button type="button" class="pw-toggle" data-target="reset-pw2" aria-label="Show password"></button>
+    </div>
+    <p class="error-text" id="reset-error"></p>
+    <div class="field-actions" style="justify-content: flex-end;">
+      <button type="button" class="secondary" id="reset-cancel">Cancel</button>
+      <button type="button" id="reset-save">Update password</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/users.js?v=6"></script>
+{% endblock %}

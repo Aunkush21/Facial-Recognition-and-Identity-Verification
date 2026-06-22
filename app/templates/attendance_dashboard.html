@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Attendance — SENTRY{% endblock %}
+{% block topbar_label %}Attendance{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="eyebrow">Daily register</div>
+  <h1>Attendance</h1>
+  <p>Presence for every active identity on the selected date. Export the day as an Excel workbook.</p>
+</div>
+
+<div class="stat-grid">
+  <div class="stat is-ok"><div class="k">Present</div><div class="v" id="stat-present">0</div><div class="note">verified today</div></div>
+  <div class="stat is-alert"><div class="k">Absent</div><div class="v" id="stat-absent">0</div><div class="note">no record</div></div>
+  <div class="stat"><div class="k">Enrolled</div><div class="v" id="stat-total">0</div><div class="note">active identities</div></div>
+</div>
+
+<div class="panel">
+  <div class="field-actions" style="margin: 0 0 18px; justify-content: space-between;">
+    <div>
+      <label for="date-picker" style="margin: 0 0 7px;">Date</label>
+      <input type="date" id="date-picker" style="max-width: 200px;">
+    </div>
+    <button id="export-btn" type="button" class="secondary">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+      Download Excel
+    </button>
+  </div>
+  <p class="summary-line" id="summary-line"></p>
+  <div class="table-wrap" style="margin-top: 14px;">
+    <table>
+      <thead>
+        <tr><th>External ID</th><th>Name</th><th>Status</th><th>Time</th><th>Confidence</th></tr>
+      </thead>
+      <tbody id="attendance-rows"></tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/dashboard.js?v=3"></script>
+{% endblock %}
