@@ -4,7 +4,7 @@ A production-style facial recognition and attendance platform with **liveness (a
 
 Faces are detected and embedded with InsightFace (ArcFace/RetinaFace), checked for liveness with a MiniFASNet anti-spoofing model, and matched against embeddings stored in PostgreSQL via `pgvector`. The whole thing is served by FastAPI with a server-rendered UI — no biometric images are ever written to disk.
 
-> 🎓 **Academic project** — built as a final-year college project submission.
+> 🎓 **Academic project** — built as a final-year college project.
 
 ---
 
